@@ -1,8 +1,9 @@
+import { Entry } from "../../interfaces";
 import { EntriesState } from "./";
 
 type EntriesAction = {
   type: "Entries - ActionName";
-  payload: any;
+  payload: Entry;
 };
 
 export const entriesReducer = (
