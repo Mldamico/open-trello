@@ -1,3 +1,9 @@
+import { Layout } from "../components/layouts";
+
 export default function Home() {
-  return <h1>Home</h1>;
+  return (
+    <Layout>
+      <h1>Hola mundo</h1>
+    </Layout>
+  );
 }
