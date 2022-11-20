@@ -15,13 +15,11 @@ export default function Home() {
         <div className="bg-slate-800 p-2 h-[calc(100vh_-_100px)]">
           <h2>In Progress</h2>
 
-          <NewEntry />
           <EntryList status={Status.IN_PROGRESS} />
         </div>
         <div className="bg-slate-800 p-2 h-[calc(100vh_-_100px)]">
           <h2>Completed</h2>
 
-          <NewEntry />
           <EntryList status={Status.FINISHED} />
         </div>
       </div>

@@ -1,7 +1,9 @@
 import React, {
   ChangeEvent,
   ChangeEventHandler,
+  RefObject,
   useContext,
+  useRef,
   useState,
 } from "react";
 import { AiOutlineSave } from "react-icons/ai";
@@ -12,6 +14,7 @@ import { UIContext } from "../../context/ui";
 export const NewEntry = () => {
   const { addNewEntry } = useContext(EntriesContext);
   const { isAddingEntry, setIsAddingEntry } = useContext(UIContext);
+  const inputRef = useRef<HTMLTextAreaElement | null>(null);
   const [inputValue, setInputValue] = useState("");
   const [touched, setTouched] = useState(false);
 
@@ -27,12 +30,18 @@ export const NewEntry = () => {
     setTouched(false);
     setIsAddingEntry(false);
   };
+
+  const setRef = (element: HTMLTextAreaElement) => {
+    inputRef.current = element;
+    inputRef.current?.focus();
+  };
   return (
     <div className="mt-2 mb-1 px-1">
       {isAddingEntry ? (
         <>
           <div className="relative my-4">
             <textarea
+              ref={setRef}
               value={inputValue}
               onChange={onTextFieldChanges}
               id="text"
