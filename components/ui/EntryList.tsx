@@ -1,4 +1,4 @@
-import React, { FC, useContext, useMemo } from "react";
+import React, { DragEvent, FC, useContext, useMemo } from "react";
 import { EntryCard } from "./";
 import { Status } from "../../interfaces/entry";
 import { EntriesContext } from "../../context/entries";
@@ -15,8 +15,15 @@ export const EntryList: FC<Props> = ({ status }) => {
     [entries]
   );
 
+  const allowDrop = (event: DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
+  const onDrop = (event: DragEvent<HTMLDivElement>) => {
+    const id = event.dataTransfer.getData("text");
+  };
+
   return (
-    <div>
+    <div onDrop={onDrop} onDragOver={allowDrop}>
       <div className="h-[calc(100vh_-250px)] overflow-scroll bg-transparent p-1">
         <ul className="opacity-100">
           {entriesByStatus.map((entry) => (
