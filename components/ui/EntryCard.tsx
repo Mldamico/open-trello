@@ -1,4 +1,5 @@
-import React, { DragEvent, FC } from "react";
+import React, { DragEvent, FC, useContext } from "react";
+import { UIContext } from "../../context/ui";
 import { Entry } from "../../interfaces";
 
 interface Props {
@@ -6,11 +7,16 @@ interface Props {
 }
 
 export const EntryCard: FC<Props> = ({ entry }) => {
+  const { startDragging, endDragging } = useContext(UIContext);
+
   const onDragSart = (event: DragEvent) => {
     event.dataTransfer.setData("text", entry._id);
+    startDragging();
   };
 
-  const onDragEnd = (event: DragEvent) => {};
+  const onDragEnd = (event: DragEvent) => {
+    endDragging();
+  };
   return (
     <div
       draggable
@@ -23,7 +29,7 @@ export const EntryCard: FC<Props> = ({ entry }) => {
           <p className="whitespace-pre-line">{entry.description}</p>
         </div>
         <div className="flex justify-end">
-          <p className="text-sm">{entry.createdAt}</p>
+          {/* <p className="text-sm">{entry.createdAt}</p> */}
         </div>
       </div>
     </div>

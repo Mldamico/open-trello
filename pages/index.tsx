@@ -8,24 +8,21 @@ export default function Home() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-x-2">
         <div className="bg-slate-800 p-2 h-[calc(100vh_-_100px)]">
           <h2>To Do</h2>
-          <div>
-            <NewEntry />
-            <EntryList status={Status.PENDING} />
-          </div>
+
+          <NewEntry />
+          <EntryList status={Status.PENDING} />
         </div>
         <div className="bg-slate-800 p-2 h-[calc(100vh_-_100px)]">
           <h2>In Progress</h2>
-          <div>
-            <NewEntry />
-            <EntryList status={Status.IN_PROGRESS} />
-          </div>
+
+          <NewEntry />
+          <EntryList status={Status.IN_PROGRESS} />
         </div>
         <div className="bg-slate-800 p-2 h-[calc(100vh_-_100px)]">
           <h2>Completed</h2>
-          <div>
-            <NewEntry />
-            <EntryList status={Status.FINISHED} />
-          </div>
+
+          <NewEntry />
+          <EntryList status={Status.FINISHED} />
         </div>
       </div>
     </Layout>
