@@ -17,7 +17,7 @@ export const EntryCard: FC<Props> = ({ entry }) => {
           <p className="whitespace-pre-line">{entry.description}</p>
         </div>
         <div className="flex justify-end">
-          <p className="text-sm">Hace 30 minutos</p>
+          <p className="text-sm">{entry.createdAt}</p>
         </div>
       </div>
     </div>

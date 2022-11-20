@@ -1,9 +1,17 @@
-import React, { ChangeEvent, ChangeEventHandler, useState } from "react";
+import React, {
+  ChangeEvent,
+  ChangeEventHandler,
+  useContext,
+  useState,
+} from "react";
 import { AiOutlineSave } from "react-icons/ai";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { EntriesContext } from "../../context/entries/EntryContext";
+import { UIContext } from "../../context/ui";
 
 export const NewEntry = () => {
-  const [isAdding, setIsAdding] = useState(false);
+  const { addNewEntry } = useContext(EntriesContext);
+  const { isAddingEntry, setIsAddingEntry } = useContext(UIContext);
   const [inputValue, setInputValue] = useState("");
   const [touched, setTouched] = useState(false);
 
@@ -14,10 +22,14 @@ export const NewEntry = () => {
   };
   const onSave = () => {
     if (inputValue.length === 0) return;
+    addNewEntry(inputValue);
+    setInputValue("");
+    setTouched(false);
+    setIsAddingEntry(false);
   };
   return (
     <div className="mt-2 mb-1 px-1">
-      {isAdding ? (
+      {isAddingEntry ? (
         <>
           <div className="relative my-4">
             <textarea
@@ -46,7 +58,7 @@ export const NewEntry = () => {
 
           <div className="flex justify-between">
             <button
-              onClick={() => setIsAdding(false)}
+              onClick={() => setIsAddingEntry(false)}
               className="flex items-center space-x-2 py-1 px-3 border rounded outline-none focus:outline-none hover:text-slate-800 hover:bg-white duration-150 ease-linear transition-all"
             >
               <AiOutlineSave />
@@ -63,7 +75,7 @@ export const NewEntry = () => {
         </>
       ) : (
         <button
-          onClick={() => setIsAdding(true)}
+          onClick={() => setIsAddingEntry(true)}
           className="w-full flex py-1 items-center justify-center space-x-2 border rounded-md hover:bg-slate-700"
         >
           <IoIosAddCircleOutline />
