@@ -1,11 +1,4 @@
-import React, {
-  ChangeEvent,
-  ChangeEventHandler,
-  RefObject,
-  useContext,
-  useRef,
-  useState,
-} from "react";
+import React, { useContext, useRef, useState } from "react";
 import { AiOutlineSave } from "react-icons/ai";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { EntriesContext } from "../../context/entries/EntryContext";
