@@ -12,8 +12,14 @@ docker-compose up -d
 mongodb://localhost:27017/entriesdb
 ```
 
-3.
+3. RUN APP
 
 ```
 yarn start dev
+```
+
+4. FILL DB
+
+```
+GET http://localhost:3000/api/seed
 ```
