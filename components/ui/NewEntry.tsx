@@ -3,11 +3,11 @@ import { AiOutlineSave } from "react-icons/ai";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { EntriesContext } from "../../context/entries/EntryContext";
 import { UIContext } from "../../context/ui";
+import { TextAreaInput } from "./TextAreaInput";
 
 export const NewEntry = () => {
   const { addNewEntry } = useContext(EntriesContext);
   const { isAddingEntry, setIsAddingEntry } = useContext(UIContext);
-  const inputRef = useRef<HTMLTextAreaElement | null>(null);
   const [inputValue, setInputValue] = useState("");
   const [touched, setTouched] = useState(false);
 
@@ -24,39 +24,16 @@ export const NewEntry = () => {
     setIsAddingEntry(false);
   };
 
-  const setRef = (element: HTMLTextAreaElement) => {
-    inputRef.current = element;
-    inputRef.current?.focus();
-  };
   return (
     <div className="mt-2 mb-1 px-1">
       {isAddingEntry ? (
         <>
-          <div className="relative my-4">
-            <textarea
-              ref={setRef}
-              value={inputValue}
-              onChange={onTextFieldChanges}
-              id="text"
-              className="peer bg-slate-800 outline w-full my-1 resize-none rounded p-2 placeholder-transparent"
-              placeholder="New Entry"
-              aria-label="New Entry"
-              onBlur={() => setTouched(true)}
-            />
-            <label
-              htmlFor="text"
-              className="absolute bg-slate-800 left-2 -top-1.5 text-gray-200 text-sm
-          peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-500 transition-all duration-150 peer-focus:-top-1.5 peer-focus:text-xs peer-focus:text-gray-200 peer-placeholder-shown:px-2 "
-            >
-              New Entry
-            </label>
-
-            {inputValue.length === 0 && touched && (
-              <div>
-                <p className="text-sm text-error">Ingrese un valor</p>
-              </div>
-            )}
-          </div>
+          <TextAreaInput
+            inputValue={inputValue}
+            onTextFieldChanges={onTextFieldChanges}
+            setTouched={setTouched}
+            touched={touched}
+          />
 
           <div className="flex justify-between">
             <button

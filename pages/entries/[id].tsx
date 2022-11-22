@@ -1,7 +1,42 @@
-import React from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { Layout } from "../../components/layouts";
-import { AiOutlineSave } from "react-icons/ai";
+import { AiOutlineSave, AiOutlineDelete } from "react-icons/ai";
+import { Status } from "../../interfaces";
+import { TextAreaInput } from "../../components/ui/TextAreaInput";
+
+const validStatus: Status[] = [
+  Status.PENDING,
+  Status.IN_PROGRESS,
+  Status.FINISHED,
+];
+
 const EntryPage = () => {
+  const [inputValue, setInputValue] = useState("");
+  const [status, setStatus] = useState<Status>(Status.IN_PROGRESS);
+  const [touched, setTouched] = useState(false);
+
+  const isValid = useMemo(
+    () => inputValue.length === 0 && touched,
+    [inputValue, touched]
+  );
+  const onTextFieldChanges = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setInputValue(event.target.value);
+  };
+
+  const onSave = () => {
+    if (inputValue.length === 0) return;
+    // addNewEntry(inputValue);
+    setInputValue("");
+    setTouched(false);
+    // setIsAddingEntry(false);
+  };
+
+  const onStatusChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setStatus(event.target.value as Status);
+  };
+
   return (
     <Layout>
       <div className="flex justify-center mt-1 bg-slate-900 w-full mx-auto md:w-[70%] lg:w-[50%] rounded-lg">
@@ -10,32 +45,49 @@ const EntryPage = () => {
             <h3>Entry</h3>
             <h5>Created at ...</h5>
           </div>
-          <div className="relative mt-2">
-            <textarea
-              // ref={setRef}
-              // value={inputValue}
-              // onChange={onTextFieldChanges}
-              id="text"
-              className="peer bg-slate-800 outline w-full my-1 resize-none rounded p-2 placeholder-transparent"
-              placeholder="New Entry"
-              aria-label="New Entry"
-              // onBlur={() => setTouched(true)}
-            />
-            <label
-              htmlFor="text"
-              className="absolute bg-slate-800 left-2 -top-1.5 text-gray-200 text-sm
-          peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-500 transition-all duration-150 peer-focus:-top-1.5 peer-focus:text-xs peer-focus:text-gray-200 peer-placeholder-shown:px-2 "
-            >
-              New Entry
-            </label>
-          </div>
+          <TextAreaInput
+            inputValue={inputValue}
+            onTextFieldChanges={onTextFieldChanges}
+            setTouched={setTouched}
+            touched={touched}
+          />
           <div>
-            <button className="flex justify-center rounded font-bold py-2 space-x-2 items-center w-full bg-slate-600 hover:bg-slate-300 hover:text-black">
+            <label htmlFor="">Status</label>
+            <div className="flex flex-row space-x-4">
+              {validStatus.map((option) => (
+                <div
+                  className="flex justify-center items-center  space-x-2"
+                  key={option}
+                >
+                  <input
+                    id={option}
+                    type="radio"
+                    value={option}
+                    checked={option === status}
+                    onChange={onStatusChanged}
+                  />
+                  <label htmlFor={option}>{option}</label>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <button
+              className="flex justify-center rounded font-bold py-2 space-x-2 items-center w-full bg-slate-600 hover:bg-slate-300 hover:text-black disabled:bg-gray-400 disabled:text-gray-600"
+              onClick={onSave}
+              disabled={inputValue.length === 0}
+            >
               <AiOutlineSave />
               <span>Save</span>
             </button>
           </div>
         </div>
+      </div>
+      <div>
+        <button className="fixed text-3xl bottom-7 right-7 bg-red-500 p-3 rounded-full">
+          <AiOutlineDelete />
+        </button>
       </div>
     </Layout>
   );
