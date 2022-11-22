@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Layout } from "../components/layouts";
 import { EntryList, NewEntry } from "../components/ui";
 import { Status } from "../interfaces";
