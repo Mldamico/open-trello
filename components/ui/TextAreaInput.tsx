@@ -25,7 +25,9 @@ export const TextAreaInput: FC<Props> = ({
         value={inputValue}
         onChange={onTextFieldChanges}
         id="text"
-        className="peer bg-slate-800 outline w-full my-1 resize-none rounded p-2 placeholder-transparent"
+        className={`peer bg-slate-800 outline w-full my-1 resize-none rounded p-2 placeholder-transparent focus:outline-lightPrimary ${
+          touched && inputValue.length === 0 && "outline-red-500 "
+        }`}
         placeholder="New Entry"
         aria-label="New Entry"
         onBlur={() => setTouched(true)}
@@ -40,7 +42,7 @@ export const TextAreaInput: FC<Props> = ({
 
       {inputValue.length === 0 && touched && (
         <div>
-          <p className="text-sm text-error">Ingrese un valor</p>
+          <p className="text-sm text-error ml-2">Ingrese un valor</p>
         </div>
       )}
     </div>

@@ -11,10 +11,6 @@ interface Props {
 }
 
 export const Layout: FC<Props> = ({ title = "Open Trello", children }) => {
-  // const [isOpen, setIsOpen] = useState(false);
-  // const toggleDrawer = () => {
-  //   setIsOpen((prevState) => !prevState);
-  // };
   const { sidemenuOpen, toggleSideMenu } = useContext(UIContext);
   return (
     <div className="flex-1 bg-lightPrimary dark:bg-darkPrimary dark:text-white">

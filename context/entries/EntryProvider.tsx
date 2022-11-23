@@ -24,7 +24,7 @@ export const EntryProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "Entries - Add Entry", payload: data });
   };
 
-  const onEntryUpdated = async (entry: Entry) => {
+  const updateEntry = async (entry: Entry, showSnackbar = false) => {
     try {
       const { data } = await entriesApi.put<Entry>(`/entries/${entry._id}`, {
         description: entry.description,
@@ -50,7 +50,7 @@ export const EntryProvider: FC<Props> = ({ children }) => {
       value={{
         ...state,
         addNewEntry,
-        onEntryUpdated,
+        updateEntry,
       }}
     >
       {children}
