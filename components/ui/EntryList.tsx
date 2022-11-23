@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const EntryList: FC<Props> = ({ status }) => {
-  const { entries, onEntryUpdated } = useContext(EntriesContext);
+  const { entries, updateEntry } = useContext(EntriesContext);
   const { isDragging, endDragging } = useContext(UIContext);
 
   const entriesByStatus = useMemo(
@@ -24,7 +24,7 @@ export const EntryList: FC<Props> = ({ status }) => {
     const id = event.dataTransfer.getData("text");
     const entry = entries.find((entry) => entry._id === id)!;
     entry.status = status;
-    onEntryUpdated(entry);
+    updateEntry(entry);
     endDragging();
   };
 

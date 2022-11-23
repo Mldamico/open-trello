@@ -9,6 +9,7 @@ import { dbEntries } from "../../database";
 import { EntriesContext } from "../../context/entries/EntryContext";
 import { useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
+import { dateFunctions } from "../../utils";
 const validStatus: Status[] = [
   Status.PENDING,
   Status.IN_PROGRESS,
@@ -59,7 +60,9 @@ const EntryPage: FC<Props> = ({ entry }) => {
           <Toaster position="top-center" reverseOrder={false} />
           <div className="flex flex-col justify-start">
             <h3>Entry</h3>
-            <h5>Created at {entry.createdAt}</h5>
+            <h5>
+              Created {dateFunctions.getFormatDistanceToNow(entry.createdAt)}
+            </h5>
           </div>
           <TextAreaInput
             inputValue={inputValue}

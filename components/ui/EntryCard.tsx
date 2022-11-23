@@ -2,7 +2,8 @@ import { useRouter } from "next/router";
 import React, { DragEvent, FC, useContext } from "react";
 import { UIContext } from "../../context/ui";
 import { Entry } from "../../interfaces";
-
+import { dateFunctions } from "../../utils";
+import { IoIosTimer } from "react-icons/io";
 interface Props {
   entry: Entry;
 }
@@ -34,7 +35,10 @@ export const EntryCard: FC<Props> = ({ entry }) => {
           <p className="whitespace-pre-line">{entry.description}</p>
         </div>
         <div className="flex justify-end">
-          {/* <p className="text-sm">{entry.createdAt}</p> */}
+          <p className="text-sm flex items-center space-x-1">
+            <IoIosTimer />
+            <span>{dateFunctions.getFormatDistanceToNow(entry.createdAt)}</span>
+          </p>
         </div>
       </div>
     </div>
