@@ -24,13 +24,22 @@ export const EntryProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "Entries - Add Entry", payload: data });
   };
 
-  const updateEntry = async (entry: Entry, showSnackbar = false) => {
+  const updateEntry = async (entry: Entry) => {
     try {
       const { data } = await entriesApi.put<Entry>(`/entries/${entry._id}`, {
         description: entry.description,
         status: entry.status,
       });
       dispatch({ type: "Entries - Entry Update", payload: data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteEntry = async (entry: Entry) => {
+    try {
+      const { data } = await entriesApi.delete<Entry>(`/entries/${entry._id}`);
+      dispatch({ type: "Entries - Delete Entry", payload: data });
     } catch (error) {
       console.log(error);
     }
@@ -51,6 +60,7 @@ export const EntryProvider: FC<Props> = ({ children }) => {
         ...state,
         addNewEntry,
         updateEntry,
+        deleteEntry,
       }}
     >
       {children}

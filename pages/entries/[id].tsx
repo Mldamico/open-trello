@@ -10,6 +10,7 @@ import { EntriesContext } from "../../context/entries/EntryContext";
 import { useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
 import { dateFunctions } from "../../utils";
+import { TailSpin } from "react-loader-spinner";
 const validStatus: Status[] = [
   Status.PENDING,
   Status.IN_PROGRESS,
@@ -24,13 +25,11 @@ const EntryPage: FC<Props> = ({ entry }) => {
   const [inputValue, setInputValue] = useState(entry.description);
   const [status, setStatus] = useState<Status>(entry.status);
   const [touched, setTouched] = useState(false);
-  const { updateEntry } = useContext(EntriesContext);
+  const [loading, setLoading] = useState(false);
+  const { updateEntry, deleteEntry } = useContext(EntriesContext);
+
   const router = useRouter();
 
-  const isValid = useMemo(
-    () => inputValue.length === 0 && touched,
-    [inputValue, touched]
-  );
   const onTextFieldChanges = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
@@ -53,8 +52,28 @@ const EntryPage: FC<Props> = ({ entry }) => {
     setStatus(event.target.value as Status);
   };
 
+  const onDelete = () => {
+    setLoading(true);
+    deleteEntry(entry);
+    toast.error("Entry has been removed 🥲");
+    setTimeout(() => {
+      setLoading(false);
+      router.push("/");
+    }, 1000);
+  };
+
   return (
     <Layout title={inputValue.substring(0, 10) + "..."}>
+      <div className="absolute top-[50%] left-[50%]">
+        <TailSpin
+          height="80"
+          width="80"
+          color="#4fa94d"
+          ariaLabel="tail-spin-loading"
+          radius="1"
+          visible={loading}
+        />
+      </div>
       <div className="flex justify-center mt-1 bg-slate-900 w-full mx-auto md:w-[70%] lg:w-[50%] rounded-lg">
         <div className="w-full m-3">
           <Toaster position="top-center" reverseOrder={false} />
@@ -104,7 +123,10 @@ const EntryPage: FC<Props> = ({ entry }) => {
         </div>
       </div>
       <div>
-        <button className="fixed text-3xl bottom-7 right-7 bg-red-500 p-3 rounded-full">
+        <button
+          className="fixed text-3xl bottom-7 right-7 bg-red-500 p-3 rounded-full"
+          onClick={onDelete}
+        >
           <AiOutlineDelete />
         </button>
       </div>
