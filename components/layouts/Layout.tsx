@@ -13,7 +13,7 @@ interface Props {
 export const Layout: FC<Props> = ({ title = "Open Trello", children }) => {
   const { sidemenuOpen, toggleSideMenu } = useContext(UIContext);
   return (
-    <div className="flex-1 bg-lightPrimary dark:bg-darkPrimary dark:text-white">
+    <div className="flex-1 bg-bgWhite dark:bg-darkPrimary dark:text-white">
       <Head>
         <title>{title}</title>
       </Head>

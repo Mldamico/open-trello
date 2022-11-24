@@ -32,7 +32,11 @@ export const EntryList: FC<Props> = ({ status }) => {
     <div
       onDrop={onDrop}
       onDragOver={allowDrop}
-      className={isDragging ? styles.dragging : ""}
+      className={
+        isDragging
+          ? "bg-[rgba(255, 255, 255, 0.2)] rounded-xl border border-dashed border-black dark:border-white "
+          : ""
+      }
     >
       <div className={`h-[calc(100vh_-_250px)] overflow-scroll p-1 `}>
         <ul

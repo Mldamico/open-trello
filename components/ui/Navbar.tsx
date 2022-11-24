@@ -8,15 +8,19 @@ export const Navbar: FC = () => {
   const [isDark, setIsDark] = useDarkMode();
   const { toggleSideMenu } = useContext(UIContext);
   return (
-    <div className="sticky bg-[#4a148c]">
+    <div className="sticky text-white bg-[#DD7373] dark:bg-[#4a148c]">
       <div className="py-3 px-6 flex items-center">
         <div>
           <HiOutlineMenuAlt1 size={24} onClick={toggleSideMenu} />
         </div>
-        <NextLink href="/" passHref>
+        <NextLink href="/" passHref className="flex-1">
           <h1 className="text-xl md:text-2xl ml-3">Open Trello</h1>
         </NextLink>
-        <div id="theme-toggle" onClick={() => setIsDark(!isDark)}>
+        <div
+          id="theme-toggle"
+          className="cursor-pointer"
+          onClick={() => setIsDark(!isDark)}
+        >
           {isDark ? (
             <svg
               className="w-5 h-5"

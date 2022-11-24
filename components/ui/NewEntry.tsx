@@ -38,14 +38,14 @@ export const NewEntry = () => {
           <div className="flex justify-between">
             <button
               onClick={() => setIsAddingEntry(false)}
-              className="flex items-center space-x-2 py-1 px-3 border rounded outline-none focus:outline-none hover:text-slate-800 hover:bg-white duration-150 ease-linear transition-all"
+              className="flex items-center space-x-2 py-1 px-3 border border-black dark:border-white rounded outline-none focus:outline-none hover:text-slate-700 hover:bg-gray-400 dark:hover:bg-white duration-150 ease-linear transition-all"
             >
               <AiOutlineSave />
               <p>Cancelar</p>
             </button>
             <button
               onClick={onSave}
-              className="flex items-center space-x-2 py-1 px-3 border rounded outline-none focus:outline-none hover:text-slate-800 hover:bg-white duration-150 ease-linear transition-all"
+              className="flex items-center space-x-2 py-1 px-3 border border-black dark:border-white rounded outline-none focus:outline-none hover:text-slate-700 hover:bg-gray-400 dark:hover:bg-white duration-150 ease-linear transition-all"
             >
               <AiOutlineSave />
               <p>Save</p>
@@ -55,7 +55,7 @@ export const NewEntry = () => {
       ) : (
         <button
           onClick={() => setIsAddingEntry(true)}
-          className="w-full flex py-1 items-center justify-center space-x-2 border rounded-md hover:bg-slate-700"
+          className="w-full flex py-1 items-center justify-center space-x-2 border border-black dark:border-white  rounded-md hover:bg-gray-400 dark:hover:bg-slate-700"
         >
           <IoIosAddCircleOutline />
           <span> Add New Entry</span>

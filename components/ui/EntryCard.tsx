@@ -28,7 +28,7 @@ export const EntryCard: FC<Props> = ({ entry }) => {
       draggable
       onDragStart={onDragSart}
       onDragEnd={onDragEnd}
-      className="mb-1 cursor-pointer bg-gray-700 p-3 hover:bg-slate-500 transition duration-200 ease-in-out rounded-xl"
+      className="mb-1 cursor-pointer bg-gray-400 hover:bg-slate-300 dark:bg-gray-700 p-3 dark:hover:bg-slate-500 transition duration-200 ease-in-out rounded-xl"
     >
       <div>
         <div>
